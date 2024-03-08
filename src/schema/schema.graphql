@@ -1,0 +1,42 @@
+type Query {
+  user: User!
+  developer(id: String!): Developer
+}
+
+type Mutation {
+  addDeveloper(input: DeveloperCreateInput!): Developer!
+}
+
+type Developer {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String
+  username: String!
+  bio: String
+  profileURL: String
+}
+
+type User {
+  id: String!
+  name: String!
+  age: Int!
+}
+
+type DeveloperEducation {
+  id: ID!
+  formalEducation: String
+  institution: String
+  year: String
+}
+
+input DeveloperCreateInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String
+  username: String!
+  bio: String
+  profileURL: String
+}

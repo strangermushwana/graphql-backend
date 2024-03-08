@@ -1,0 +1,14 @@
+node_modules
+build
+npm-debug.log
+.env
+.DS_Store
+.idea
+/.idea
+/idea
+/config
+dist/
+yarn-error.log
+.vscode
+migration_data/*.txt
+migration_data/*.json

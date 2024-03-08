@@ -1,0 +1,40 @@
+overwrite: true
+schema:
+  './src/schema/schema.graphql':
+    noRequire: true
+generates:
+  src/generated/graphqlgen.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      namingConvention:
+        enumValues: change-case-all#upperCase
+      useIndexSignature: true
+      wrapFieldDefinitions: true
+      avoidOptionals: false
+      resolverTypeSuffix: 'ResolversType'
+      federation: false
+      defaultMapper: Partial<{T}>
+      contextType: ../types/types#Context
+      scalars:
+        Date: string
+        ObjectID: string
+        timestamptz: string
+        uuid: string
+      customResolverFn: |
+        ((
+            parent: TParent,
+            args: TArgs,
+            context: TContext,
+            info: GraphQLResolveInfo
+          ) => Promise<TResult> | TResult)
+        | {
+            fragment: TResult;
+            resolve: (
+              parent: TParent,
+              args: TArgs,
+              context: TContext,
+              info: GraphQLResolveInfo
+            ) => Promise<TResult> | TResult;
+          };
