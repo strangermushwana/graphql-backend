@@ -32,62 +32,36 @@ export type Scalars = {
   Float: number;
 };
 
-export type Developer = {
-  __typename?: 'Developer';
-  bio?: Maybe<FieldWrapper<Scalars['String']>>;
-  email: FieldWrapper<Scalars['String']>;
-  firstName: FieldWrapper<Scalars['String']>;
-  id: FieldWrapper<Scalars['ID']>;
-  lastName: FieldWrapper<Scalars['String']>;
-  phoneNumber?: Maybe<FieldWrapper<Scalars['String']>>;
-  profileURL?: Maybe<FieldWrapper<Scalars['String']>>;
-  username: FieldWrapper<Scalars['String']>;
-};
-
-export type DeveloperCreateInput = {
-  bio?: InputMaybe<Scalars['String']>;
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  profileURL?: InputMaybe<Scalars['String']>;
-  username: Scalars['String'];
-};
-
-export type DeveloperEducation = {
-  __typename?: 'DeveloperEducation';
-  formalEducation?: Maybe<FieldWrapper<Scalars['String']>>;
-  id: FieldWrapper<Scalars['ID']>;
-  institution?: Maybe<FieldWrapper<Scalars['String']>>;
-  year?: Maybe<FieldWrapper<Scalars['String']>>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  addDeveloper: FieldWrapper<Developer>;
+  createOrganization: FieldWrapper<Organization>;
 };
 
 
-export type MutationAddDeveloperArgs = {
-  input: DeveloperCreateInput;
+export type MutationCreateOrganizationArgs = {
+  input: OrganizationCreateInput;
+};
+
+export type Organization = {
+  __typename?: 'Organization';
+  email: FieldWrapper<Scalars['String']>;
+  id: FieldWrapper<Scalars['ID']>;
+  title?: Maybe<FieldWrapper<Scalars['String']>>;
+};
+
+export type OrganizationCreateInput = {
+  email?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  developer?: Maybe<FieldWrapper<Developer>>;
-  user: FieldWrapper<User>;
+  getOrganizationById?: Maybe<FieldWrapper<Organization>>;
 };
 
 
-export type QueryDeveloperArgs = {
+export type QueryGetOrganizationByIdArgs = {
   id: Scalars['String'];
-};
-
-export type User = {
-  __typename?: 'User';
-  age: FieldWrapper<Scalars['Int']>;
-  id: FieldWrapper<Scalars['String']>;
-  name: FieldWrapper<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -154,72 +128,43 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']>>;
-  Developer: ResolverTypeWrapper<Partial<Developer>>;
-  DeveloperCreateInput: ResolverTypeWrapper<Partial<DeveloperCreateInput>>;
-  DeveloperEducation: ResolverTypeWrapper<Partial<DeveloperEducation>>;
   ID: ResolverTypeWrapper<Partial<Scalars['ID']>>;
-  Int: ResolverTypeWrapper<Partial<Scalars['Int']>>;
   Mutation: ResolverTypeWrapper<{}>;
+  Organization: ResolverTypeWrapper<Partial<Organization>>;
+  OrganizationCreateInput: ResolverTypeWrapper<Partial<OrganizationCreateInput>>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Partial<Scalars['String']>>;
-  User: ResolverTypeWrapper<Partial<User>>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Boolean: Partial<Scalars['Boolean']>;
-  Developer: Partial<Developer>;
-  DeveloperCreateInput: Partial<DeveloperCreateInput>;
-  DeveloperEducation: Partial<DeveloperEducation>;
   ID: Partial<Scalars['ID']>;
-  Int: Partial<Scalars['Int']>;
   Mutation: {};
+  Organization: Partial<Organization>;
+  OrganizationCreateInput: Partial<OrganizationCreateInput>;
   Query: {};
   String: Partial<Scalars['String']>;
-  User: Partial<User>;
-}>;
-
-export type DeveloperResolversType<ContextType = Context, ParentType extends ResolversParentTypes['Developer'] = ResolversParentTypes['Developer']> = ResolversObject<{
-  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  profileURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type DeveloperEducationResolversType<ContextType = Context, ParentType extends ResolversParentTypes['DeveloperEducation'] = ResolversParentTypes['DeveloperEducation']> = ResolversObject<{
-  formalEducation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  institution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  year?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type MutationResolversType<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  addDeveloper?: Resolver<ResolversTypes['Developer'], ParentType, ContextType, RequireFields<MutationAddDeveloperArgs, 'input'>>;
+  createOrganization?: Resolver<ResolversTypes['Organization'], ParentType, ContextType, RequireFields<MutationCreateOrganizationArgs, 'input'>>;
 }>;
 
-export type QueryResolversType<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  developer?: Resolver<Maybe<ResolversTypes['Developer']>, ParentType, ContextType, RequireFields<QueryDeveloperArgs, 'id'>>;
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-}>;
-
-export type UserResolversType<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  age?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type OrganizationResolversType<ContextType = Context, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = ResolversObject<{
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type QueryResolversType<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  getOrganizationById?: Resolver<Maybe<ResolversTypes['Organization']>, ParentType, ContextType, RequireFields<QueryGetOrganizationByIdArgs, 'id'>>;
+}>;
+
 export type Resolvers<ContextType = Context> = ResolversObject<{
-  Developer?: DeveloperResolversType<ContextType>;
-  DeveloperEducation?: DeveloperEducationResolversType<ContextType>;
   Mutation?: MutationResolversType<ContextType>;
+  Organization?: OrganizationResolversType<ContextType>;
   Query?: QueryResolversType<ContextType>;
-  User?: UserResolversType<ContextType>;
 }>;
 
